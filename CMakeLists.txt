@@ -492,6 +492,10 @@ ctk_lib_option(PluginFramework
                "Build the Plugin Framework" OFF
                CTK_ENABLE_PluginFramework)
 
+ctk_lib_option(Widgets
+        "Build the Widgets library" OFF
+        CTK_ENABLE_Widgets OR (CTK_ENABLE_DICOMApplicationHosting AND CTK_BUILD_EXAMPLES) OR CTK_USE_QTTESTING)
+  
 ctk_lib_option(CommandLineModules/Core
 	       "Build the Command Line Module core library" OFF)
 
@@ -607,6 +611,12 @@ endif()
 # three arguments. This expression should only contain build option names
 # which belong to leafs in the required dependency tree.
 
+# The CTK Qt Widgets. This will enable the Qt Widget library only.
+# It might trigger the enabling of other widget libraries in combination
+# with other enabled options.
+ctk_enable_option(Widgets "Enable Qt Widget libraries" OFF
+                  CTK_LIB_Widgets)
+                  
 # The CTK Plugin Framework, a dynamic component system based on OSGi.
 # This will enable only the framework itself.
 ctk_enable_option(PluginFramework "Enable Plugin Framework" OFF
